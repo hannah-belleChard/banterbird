@@ -1,22 +1,41 @@
 const username = "admin";
 
 function renderPost(post) {
-    const template = document.getElementById("post-template").content.cloneNode(true);
-    template.querySelector(".username").innerText = post.username;
-    template.querySelector(".message").innerText = post.message;
-    document.getElementById("feed").appendChild(template);
+  const template = document
+    .getElementById("post-template")
+    .content.cloneNode(true);
+  template.querySelector(".username").innerText = post.username;
+  template.querySelector(".message").innerText = post.message;
+  document.getElementById("feed").appendChild(template);
 }
 
-function submitPost() {
-    const message = document.getElementById("postInput").value;
-    console.log("Would post:", message);
-    alert("Tweet submitted (not really yet)");
+async function submitPost() {
+  const message = document.getElementById("postInput").value;
+  try{
+    const response=await fetch("/api/add_posts", {
+        method: "POST",
+        headers:{
+            "content-type": "application/json",
+        }, 
+        body: JSON.stringify({
+            username,
+            message,
+        }),
+    })
+
+
+  }catch (error){
+    console.log("😭 Post Failed", error)
+  }
+
 }
 
-window.onload = () => {
-    const hardcodedPost = {
-        username: "admin",
-        message: "Welcome to Banterbird! This post is hardcoded.",
-    };
-    renderPost(hardcodedPost);
+window.onload = async () => {
+  try {
+    const response = await fetch("/api/posts");
+    const posts = await response.json();
+    posts.forEach((post) => renderPost(post));
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+  }
 };
