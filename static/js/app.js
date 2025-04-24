@@ -1,31 +1,33 @@
 const username = "admin";
 
-function renderPost(post) {
+function renderPost(post, isNew = false) {
   const template = document
     .getElementById("post-template")
     .content.cloneNode(true);
   template.querySelector(".username").innerText = post.username;
   template.querySelector(".message").innerText = post.message;
-  document.getElementById("feed").appendChild(template);
+ 
+  if (isNew) {
+    document.getElementById("feed").prepend(template);
+  } else {
+    document.getElementById("feed").appendChild(template);
+  }
 }
 
 async function submitPost() {
   const message = document.getElementById("postInput").value;
-  try{
-    const response=await fetch("/api/add_posts", {
-        method: "POST",
-        headers:{
-            "content-type": "application/json",
-        }, 
-        body: JSON.stringify({
-            username,
-            message,
-        }),
-    })
-
-
-  }catch (error){
-    console.log("😭 Post Failed", error)
+  try {
+    const response = await fetch("/api/add_posts", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, message }),
+    });
+    if (response.ok) {
+      renderPost({ username, message }, true); // Pass `isNew = true`
+      document.getElementById("postInput").value = ""; // Clear the input box
+    }
+  } catch (error) {
+    console.error("Error submitting post:", error);
   }
 
 }

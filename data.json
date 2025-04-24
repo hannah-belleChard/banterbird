@@ -1,14 +1,18 @@
 [
     {
-      "username": "admin",
-      "message": "Welcome to Banterbird!"
+        "username": "admin",
+        "message": "hello"
     },
     {
-      "username": "chad",
-      "message": "Excited to be here!"
+        "username": "admin",
+        "message": "Welcome to Banterbird!"
     },
     {
-      "username": "bob",
-      "message": "Just joined. Let's tweet!"
+        "username": "chad",
+        "message": "Excited to be here!"
+    },
+    {
+        "username": "bob",
+        "message": "Just joined. Let's tweet!"
     }
-  ]
+]
