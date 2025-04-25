@@ -1,0 +1,30 @@
+/* style.css */
+
+body {
+    font-family: sans-serif;
+    background-color: #FFFFE0;
+    padding: 20px;
+    margin: auto;
+    width: 50%;
+    border: 3px solid #FF69B4;
+
+}
+
+#feed {
+    margin-top: 30px;
+    border-radius: 15px;
+    border: 5px solid #ffc000;
+    padding: 20px;
+    width: 200px;
+    height: 30px;
+}
+
+#postInput {
+    background-color: #B19CD9;
+    opacity: 0.6;
+    color: white;
+}
+button {
+    background-color: #0096ff;
+    color:aliceblue;
+}
